@@ -14,11 +14,11 @@ export class DatabaseStack extends Stack {
 
     this.coffeeOrdersTable = new Table(this, 'CoffeeOrdersTable', {
       partitionKey: {
-        name: 'customer_name',
+        name: 'CustomerName',
         type: AttributeType.STRING
       },
       sortKey: {
-        name: 'coffee_blend',
+        name: 'CoffeeBlend',
         type: AttributeType.STRING
       },
       tableName: `CoffeeOrders-${suffix}`,
