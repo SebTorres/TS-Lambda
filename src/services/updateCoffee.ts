@@ -12,8 +12,8 @@ export const handler = async (
   const params: AWS.DynamoDB.DocumentClient.UpdateItemInput = {
     TableName: process.env.COFFEE_ORDERS_TABLE || '',
     Key: {
-      OrderId: order_id,
-      CustomerName: customer_name,
+      order_id,
+      customer_name,
     },
     UpdateExpression: 'SET OrderStatus = :status',
     ExpressionAttributeValues: {
