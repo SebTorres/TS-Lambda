@@ -1,0 +1,56 @@
+meta {
+  name: Create Coffee Order
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/coffee
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "customer_name": "John Doe",
+    "coffee_blend": "Colombian Supreme"
+  }
+}
+
+vars:post-response {
+  orderId: res.body.OrderId
+}
+
+tests {
+  test("Status code is 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response contains success message", function () {
+    expect(res.getBody()).to.have.property('message');
+    expect(res.getBody().message).to.equal('Order created successfully!');
+  });
+  
+  test("Response contains OrderId", function () {
+    expect(res.getBody()).to.have.property('OrderId');
+    expect(res.getBody().OrderId).to.be.a('string');
+  });
+}
+
+docs {
+  Creates a new coffee order with the specified customer name and coffee blend.
+  
+  Request Body:
+  - customer_name (string): The name of the customer placing the order
+  - coffee_blend (string): The type of coffee blend requested
+  
+  Response:
+  - message (string): Success message
+  - OrderId (string): UUID of the created order
+  
+  The order will be created with a status of 'Pending' by default.
+}

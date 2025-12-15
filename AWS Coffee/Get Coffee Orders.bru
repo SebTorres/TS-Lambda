@@ -1,0 +1,42 @@
+meta {
+  name: Get Coffee Orders
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/coffee
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status code is 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response is an array", function () {
+    expect(res.getBody()).to.be.an('array');
+  });
+  
+  test("Orders have required properties", function () {
+    const orders = res.getBody();
+    if (orders.length > 0) {
+      expect(orders[0]).to.have.property('OrderId');
+      expect(orders[0]).to.have.property('CustomerName');
+      expect(orders[0]).to.have.property('CoffeeBlend');
+      expect(orders[0]).to.have.property('OrderStatus');
+    }
+  });
+}
+
+docs {
+  Retrieves all coffee orders from the database.
+  
+  Response:
+  - Array of coffee order objects, each containing:
+    - OrderId (string): Unique identifier for the order
+    - CustomerName (string): Name of the customer
+    - CoffeeBlend (string): Type of coffee ordered
+    - OrderStatus (string): Current status of the order (e.g., 'Pending', 'Completed')
+}

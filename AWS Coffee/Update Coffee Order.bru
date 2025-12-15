@@ -1,0 +1,53 @@
+meta {
+  name: Update Coffee Order
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/coffee
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "order_id": "{{orderId}}",
+    "customer_name": "John Doe",
+    "new_status": "Completed"
+  }
+}
+
+tests {
+  test("Status code is 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response contains success message", function () {
+    expect(res.getBody()).to.have.property('message');
+    expect(res.getBody().message).to.equal('Order status updated successfully!');
+  });
+  
+  test("Response contains OrderID", function () {
+    expect(res.getBody()).to.have.property('OrderID');
+  });
+}
+
+docs {
+  Updates the status of an existing coffee order.
+  
+  Request Body:
+  - order_id (string): The ID of the order to update
+  - customer_name (string): The name of the customer who placed the order
+  - new_status (string): The new status for the order (e.g., 'Completed', 'In Progress', 'Cancelled')
+  
+  Response:
+  - message (string): Success message
+  - OrderID (string): ID of the updated order
+  
+  Note: Uses the orderId variable captured from the Create Coffee Order request.
+}

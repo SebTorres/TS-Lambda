@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "AWS Coffee",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

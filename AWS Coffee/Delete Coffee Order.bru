@@ -1,0 +1,51 @@
+meta {
+  name: Delete Coffee Order
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/coffee
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "order_id": "{{orderId}}",
+    "customer_name": "John Doe"
+  }
+}
+
+tests {
+  test("Status code is 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response contains success message", function () {
+    expect(res.getBody()).to.have.property('message');
+    expect(res.getBody().message).to.equal('Order deleted successfully!');
+  });
+  
+  test("Response contains OrderId", function () {
+    expect(res.getBody()).to.have.property('OrderId');
+  });
+}
+
+docs {
+  Deletes an existing coffee order from the database.
+  
+  Request Body:
+  - order_id (string): The ID of the order to delete
+  - customer_name (string): The name of the customer who placed the order
+  
+  Response:
+  - message (string): Success message
+  - OrderId (string): ID of the deleted order
+  
+  Note: Uses the orderId variable captured from the Create Coffee Order request.
+}
