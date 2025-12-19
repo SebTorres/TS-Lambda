@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -11,14 +13,17 @@
   "description": "",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.152",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
     "aws-cdk": "^2.1025.0",
     "aws-cdk-lib": "^2.212.0",
     "constructs": "^10.4.2",
+    "jest": "^29.7.0",
     "serverless-create-global-dynamodb-table": "^3.1.1",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-offline": "^14.4.0",
     "serverless-prune-plugin": "^2.1.0",
+    "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   },
@@ -31,6 +36,9 @@
     "@dazn/lambda-powertools-logger": "^1.28.1",
     "@dazn/lambda-powertools-pattern-basic": "^1.29.0",
     "@dazn/lambda-powertools-sns-client": "^1.28.1",
-    "@dazn/lambda-powertools-sqs-client": "^1.28.1"
+    "@dazn/lambda-powertools-sqs-client": "^1.28.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+    "reflect-metadata": "^0.2.2"
   }
 }
